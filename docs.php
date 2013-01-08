@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Feaxures documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+  </head>
+
+  <body>
+
+    <div class="container-narrow">
+
+      <?php $section = 'docs'; include('_header.php');?>
+
+      <h1>Documentation</h1>
+
+      <hr>
+
+      <div class="row-fluid marketing">
+        <div class="span12">
+          <p>The best way to learn how to use Feaxures is to look at the source code of the <a href="example/">example page</a> as I tried to document it as much as possible. To use Feaxures you must perform the following steps:</p>
+          <h2>1. Load the files</h2>
+          <p><strong>Feaxures JS</strong> depends on 2 libraries which need to be loaded beforehand:
+          <ul>
+            <li><a href="http://www.requirejs.org">RequireJS</a>. Although you can change it with your own (<a href="faq.php#no-requirejs">see FAQ</a>)</li>
+            <li><a href="http://www.jquery.com">jQuery</a>. Although you can change it with your own (<a href="faq.php#no-jquery">see FAQ</a>)</li>
+          </ul>
+          <p><span class="label label-important">Important</span> Feaxures is defined as an AMD module so you only need to load <code>require.js</code> before using it. You may load jQuery as well just for optimization reasons.</p>
+          <p>You also need to load your features' definition file (eg: <code>feaxures-def.js</code>). At this point you don't need to load <code>feaxures.js</code> as you will define it as a depedency withing <code>feaxures-def.js</code> (at step 2)</p>
+
+          <h2>2. Define your feaxures </h2>
+          <p>Because Feaxures JS depends on RequireJS you must first configure require.js. You can learn more about requireJS configuration options <a href="http://requirejs.org/docs/api.html#config">here</a>.</p>
+          <pre class="prettyprint linenums lang-js">
+require.config({
+    // the main location of your JS files; everything else will be relative to this path
+    'baseUrl': './js/',
+    // requireJS uses plugins for loading files other than javascript (ie: CSS, text files)
+    // and here is where you define the plugin's locations.
+    // you may choose to concatenate require.js and the plugins you use
+    'map': {
+        '*': {
+            'css': 'require.css'
+        }
+    },
+    // you can define multiple locations for each file you need. 
+    // if a file is not found in one location,
+    // requireJS will try to load it from another place
+    // you MUST NOT end your paths with .js or .css as requireJS will do that for you
+    'paths': {
+        'jquery': ['//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min', 'jquery'],
+        // you can also define paths for folders. the line bellow tells requireJS
+        // load everything that starts with 'jqueryui' from the folder '../jqueryui' relative to the baseUrl
+        'jqueryui': '../jqueryui'
+    },
+    // this is how you must define your depencies with requireJS
+    // the lines bellow will instruct requireJS that before trying to load jquery.ui.tabs.js to load a list of files first
+    'shim': {
+        'jqueryui/jquery.ui.tabs': {
+            // the css! prefix instructs requireJS to use the CSS plugin for loading that particular file
+            deps: ['jquery', 'jqueryui/jquery.ui.core', 'jqueryui/jquery.ui.widget', 'css!jqueryui/css/jquery-ui-1.9.2.custom.min']
+        },
+        'jqueryui/jquery.ui.accordion': {
+            deps: ['jquery', 'jqueryui/jquery.ui.core', 'jqueryui/jquery.ui.widget', 'css!jqueryui/css/jquery-ui-1.9.2.custom.min']
+        },
+        'jqueryui/jquery.ui.datepicker': {
+            deps: ['jquery', 'jqueryui/jquery.ui.core', 'jqueryui/jquery.ui.widget', 'css!jqueryui/css/jquery-ui-1.9.2.custom.min']
+        }
+    }
+});           </pre>
+              <p>If you're NOT using requireJS for something else you may include the above definition directly into the <code>feaxures-def.js</code> file. Now, let's define our features.</p>
+              <pre class="prettyprint linenums lang-js">
+// since Feaxures is defined as AMD module and requireJS is also an module loader,
+// we load it as an AMD module. If you don't want to do that you may skip
+// embeding the script below in a require() call because Feaxures is available
+// in the global name space as well.
+require(['feaxures'], function(Feaxures) {
+    // create an instance of the feaxures using a specific configuration
+    var feaxures = new Feaxures({
+      // activate the debug mode, which outputs various messages to the console
+      'debug': true,
+    });
+    // register a new feature (in this example jQuery UI tabs)
+    feaxures.register('tabs', {
+        // auto-load the feature. true/false (default)
+        // this will load the files as soon as feaxures is initialized 
+        // and will NOT wait for the DOM to be ready
+        'autoLoad'    : false,
+
+        // the selector that will be used to query the DOM
+        // for elements that will have this feature enabled.
+        // by default it is constructed as '[data-fxr-{name-of-the-feature}]'
+        // you can change it for optimization purposes with somethig like '.tabs'
+        // (querying by class name is faster than by attribute name)
+        'selector'    : '[data-fxr-tabs]',
+
+        // files needed by this feature
+        // should be in the format required by the loader (in this case requireJS)
+        'files': ['jqueryui/jquery.ui.tabs'],
+
+        // default configuration options for the feature
+        // this object will be merged with the specific configuration options
+        // that are applicable to each DOM element (see step 3)
+        'defaults'    : {},
+
+        // when to attach the feature to the elements
+        // available options: domready (default), click, hover, focus
+        'attachEvent' : 'domready',
+
+        // callback to be executed after the feature's files are loaded
+        'onLoad'      : null,
+
+        // callback to be executed if there are errors while loading the files
+        'onLoadError' : null,
+
+        // callback to be executed before a feature is applied to a DOM element
+        // if the callback returns false the feature is not applied anymore
+        'beforeApply' : null,
+        
+        // callback to be executed after a feature is applied to  a DOM element
+        'afterApply'  : null,
+        
+        // function that contains the code to attach a feature to the element
+        // requires 2 parameters:
+        // el: the DOM element
+        // options: a javascript object containing the options of the feature
+        'attach': function(el, options) {
+            $(el).tabs(options);
+        }
+    });
+    feaxures.initialize();
+});
+              </pre>
+
+              <h2>3. Add feaxures to your HTML markup</h2>
+              <p>Feaxures uses attributes with the <code>data-fxr-</code> prefix to determine what features apply to a specific element. So, for an element with the 'tabs' feature the code looks like bellow</p>
+<pre class="prettyprint numlines lang-html">
+&lt;div data-fxr-tabs=""&gt;
+  &lt;!-- rest of the mark up goes here --&gt;
+&lt;/div&gt;
+</pre>
+              <p>The content of the <code>data-fxr-tabs</code> will determine the options that will be applied to that DOM element. Here Feaxures JS offers you lots of flexibility.</p>
+              <ol>
+                <li><strong>true</strong> or <strong>leave it empty</strong>. This means the feature will be applied using the default options</li>
+                <li><strong>false</strong>. This means the feature will NOT be applied.</li>
+                <li><strong>a URL query string</strong> like <code>key=value&amp;another_key=another_value</code>.</li>
+                <li><strong>a javascript object string</strong> like <code>{"key": "value", "another_key": "another_value"}</code> (be carefull with the quotes though). To convert the string into a javascript object we use <code>eval()</code>.</li>
+                <li><strong>a ID of a DOM element</strong> like "#tabsConfig" which will point to a <code>script</code> element containing the options.
+<pre class="prettyprint numlines lang-html">
+&lt;script type="text/feaxures" id="tabConfig"&gt;
+{
+    "active": "1",
+    "load": function(event, ui) {
+        alert("tab content loaded");
+    }
+}
+&lt;/script&gt;</pre>
+                  <p>I chose to use the <code>script</code> tag for 2 reasons: it's not visible to the user and your editor will highlight the syntax.</p>
+                  <p><span class="label label-important">Important</span> You must use "text/feaxures", otherwise the browser will interpret the code.</p>
+                  <p>The content of script block is eval()'ed into an object.</p>
+                </li>
+                <li><strong>a function</strong> if the data-fxr attribute or the DOM element that it points to start with <code>function</code>.
+<pre class="prettyprint numlines lang-html">
+&lt;script type="text/feaxures" id="tabConfig"&gt;
+function(element) {
+  // do some expensive computation here
+  // and then return an object or false
+}
+&lt;/script&gt;</pre>
+                  <p>The function receives the DOM element as the only argument and returns an object or false, if you don't what to apply the feature to that element.</p>
+                </li>
+              </ol>
+
+              <h2>4. Feaxures events</h2>
+              <p>You can attach various callbacks on different events implemented on Feaxures (check out the <a href="example/js/example.js">example.js</a> source code).</p>
+              <p>The events available on Feaxures are <code>load</code>, <code>loadError</code>, <code>beforeAttach</code>, <code>afterAttach</code> and the callbacks you assign to each of them will be executed for each feaxure. If you want to attach an event to a specific feaxure you must use the suffix <code>:feaxureName</code> (eg: <code>loadError:tabs</code>)</p>
+              <p>Some use cases for events are:</p>
+              <ul>
+                  <li>Notify the developers when a feaxure is not loaded.</li>
+                  <li>Trigger an event in Google Analytics</li>
+              </ul>
+
+              <h2>5. Known issues</h2>
+              <ul>
+                  <li>
+                      <strong>IE load errors</strong>. RequireJS has some has problems detecting load errors in IE (see <a href="http://requirejs.org/docs/api.html#ieloadfail">this explanation</a>).
+                      <p>To handle this issue, in the feaxure's <code>attach</code> method check if the rest of the code can work (see the example for the <code>fake</code> feaxure)</p>
+                  </li>
+              </ul>
+        </div>
+
+      </div>
+
+      <?php include('_footer.php');?>
+
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
