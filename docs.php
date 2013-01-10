@@ -127,10 +127,10 @@ require(['feaxures'], function(Feaxures) {
 
         // callback to be executed before a feature is applied to a DOM element
         // if the callback returns false the feature is not applied anymore
-        'beforeApply' : null,
+        'onBeforeApply' : null,
         
         // callback to be executed after a feature is applied to  a DOM element
-        'afterApply'  : null,
+        'onAfterApply'  : null,
         
         // function that contains the code to attach a feature to the element
         // requires 2 parameters:
@@ -185,7 +185,7 @@ function(element) {
 
               <h2>4. Feaxures events</h2>
               <p>You can attach various callbacks on different events implemented on Feaxures (check out the <a href="example/js/example.js">example.js</a> source code).</p>
-              <p>The events available on Feaxures are <code>load</code>, <code>loadError</code>, <code>beforeAttach</code>, <code>afterAttach</code> and the callbacks you assign to each of them will be executed for each feaxure. If you want to attach an event to a specific feaxure you must use the suffix <code>:feaxureName</code> (eg: <code>loadError:tabs</code>)</p>
+              <p>The events available on Feaxures are <code>load</code>, <code>loadError</code>, <code>onBeforeAttach</code>, <code>onAfterAttach</code> and the callbacks you assign to each of them will be executed for each feaxure. If you want to attach an event to a specific feaxure you must use the suffix <code>:feaxureName</code> (eg: <code>loadError:tabs</code>)</p>
               <p>Some use cases for events are:</p>
               <ul>
                   <li>Notify the developers when a feaxure is not loaded.</li>

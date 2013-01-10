@@ -61,8 +61,8 @@ require(['feaxures'], function(Feaxures) {
      * Available events are:
      * - load: when a feaxure's files are loaded
      * - loadError: when a feaxure's files are not loaded
-     * - beforeAttach: before attaching a feaxure to an element (if it returns false, the feaxure will not be attached anymore)
-     * - afterAttach: after attaching a feaxure to an element
+     * - onBeforeAttach: before attaching a feaxure to an element (if it returns false, the feaxure will not be attached anymore)
+     * - onAfterAttach: after attaching a feaxure to an element
      * You can also attach events for specific feaxures by adding the ':[feaxureName]' suffix to the event. 
      * For exmple the 'load:tabs' will be triggered only when the files for the 'tabs' feaxure are loaded
      */
@@ -88,10 +88,10 @@ require(['feaxures'], function(Feaxures) {
     });
 
     // other events
-    feaxures.on('beforeAttach', function(event) {
+    feaxures.on('onBeforeAttach', function(event) {
         $('#logger').append('<p class="alert alert-success">Feaxure "'+event.feature+'" to be attached on #'+$(event.target).attr('id')+'</p>');
     });
-    feaxures.on('afterAttach:accordion', function(event) {
+    feaxures.on('onAfterAttach:accordion', function(event) {
         $('#logger').append('<p class="alert alert-success">"Accordion" was attached on #'+$(event.target).attr('id')+'</p>');
     });
 
@@ -100,7 +100,7 @@ require(['feaxures'], function(Feaxures) {
      * we are using Modernizr to add the 'js' class to the HTML tag
      * so, if the element matches the '.js .fouc' selector it's hidden by default
      */
-    feaxures.on('afterAttach', function(event) {
+    feaxures.on('onAfterAttach', function(event) {
         if ($(event.target).hasClass('fouc')) {
             $(event.target).css({display: 'none'}).removeClass('fouc').fadeIn(1000);
         }
@@ -151,14 +151,14 @@ require(['feaxures'], function(Feaxures) {
 
         files: ['js!jqueryui/jquery.ui.core.js!order', 'js!jqueryui/jquery.ui.widget.js!order', 'js!jqueryui/jquery.ui.datepicker.js!order', 'css!jqueryui/css/jquery-ui-1.9.2.custom.min.css'],
 
-        // setting the 'beforeAttach' property here is the same as doing feaxures.on('beforeAttach:datepicker', function(event){})
+        // setting the 'onBeforeAttach' property here is the same as doing feaxures.on('onBeforeAttach:datepicker', function(event){})
         // the function bellow will prevent the feaxures to be added to #anotherday
-        beforeAttach: function(event) {
+        onBeforeAttach: function(event) {
             if ($(event.target).attr('id') === 'anotherday') {
                 event.result = false;
             }
         },
-        afterAttach: function(event) {
+        onAfterAttach: function(event) {
            $('#logger').append('<p class="alert">"Datepicker" was attached on #'+$(event.target).attr('id')+'</p>');
         },
         attach: function(el, options) {
