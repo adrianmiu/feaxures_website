@@ -52,30 +52,30 @@ require(['feaxures'], function(Feaxures) {
      */
 
     // callback executed once the first feaxure gets it's files loaded
-    feaxures.one('load', function(event, feature) {
+    feaxures.one('load', function(event) {
         $('#logger').append('<p class="alert alert-info">First feaxure was loaded</p>');
     });
 
     // callback executed each time a feaxure's files are loaded
-    feaxures.on('load', function(event, feature) {
-        $('#logger').append('<p class=alert alert-success">Feaxure "'+feature+'" was loaded</p>');
+    feaxures.on('load', function(event) {
+        $('#logger').append('<p class=alert alert-success">Feaxure "'+event.feature+'" was loaded</p>');
     });
 
     // callback executed when the 'tabs' feaxure's file are loaded
-    feaxures.on('load:tabs', function(event, feature) {
+    feaxures.on('load:tabs', function(event) {
         $('#logger').append('<p class="alert alert-success">The "tabs" feaxure was loaded</p>');
     });
 
     // callback executed each time a feaxure's file fail to load
-    feaxures.on('loadError', function(event, feature) {
-        $('#logger').append('<p class="alert alert-error">Feaxure "'+feature+'" was NOT loaded</p>');
+    feaxures.on('loadError', function(event) {
+        $('#logger').append('<p class="alert alert-error">Feaxure "'+event.feature+'" was NOT loaded</p>');
     });
 
     // other events
-    feaxures.on('onBeforeAttach', function(event) {
+    feaxures.on('beforeAttach', function(event) {
         $('#logger').append('<p class="alert alert-success">Feaxure "'+event.feature+'" to be attached on #'+$(event.target).attr('id')+'</p>');
     });
-    feaxures.on('onAfterAttach:accordion', function(event) {
+    feaxures.on('afterAttach:accordion', function(event) {
         $('#logger').append('<p class="alert alert-success">"Accordion" was attached on #'+$(event.target).attr('id')+'</p>');
     });
 
@@ -84,7 +84,7 @@ require(['feaxures'], function(Feaxures) {
      * we are using Modernizr to add the 'js' class to the HTML tag
      * so, if the element matches the '.js .fouc' selector it's hidden by default
      */
-    feaxures.on('onAfterAttach', function(event) {
+    feaxures.on('afterAttach', function(event) {
         if ($(event.target).hasClass('fouc')) {
             $(event.target).css({display: 'none'}).removeClass('fouc').fadeIn(1000);
         }
@@ -143,10 +143,9 @@ require(['feaxures'], function(Feaxures) {
             }
         },
         onAfterAttach: function(event) {
-           $('#logger').append('<p class="alert">"Datepicker" was attached on #'+$(event.target).attr('id')+'</p>');
+            $('#logger').append('<p class="alert">"Datepicker" was attached on #'+$(event.target).attr('id')+'</p>');
         },
         attach: function(el, options) {
-            console.log(options);
             $(el).datepicker(options);
         }
     });
