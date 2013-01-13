@@ -55,7 +55,7 @@
           <h2>Did I caught your attention?</h2>
           <p>If you want to add <strong>Feaxures</strong> to your toolkit, check out the <a href="example/">example</a> and read the <a href="docs.php">documentation</a>. The <a href="faq.php">FAQ</a> page will answer you questions ranging from "why Feaxures?" to "How can I use Feaxures without RequireJS?"</p>
 
-          <p class="alert alert-info">Feaxures JS is MIT licenced. In case you're interested</p>
+          <p class="alert alert-info">Feaxures JS is MIT licenced... in case you're interested :)</p>
         </div>
 
       </div>

@@ -44,7 +44,7 @@
         <p>This tabbed container has the following characteristics</p>
         <ul>
             <li>is configured using the <code>data-fxr-tabs</code> attribute which points to a <code>script</code> tag</li>
-            <li>the third tab's content is loaded asyncronously and contains an accordion</li>
+            <li>the first tab's content is loaded asyncronously and contains an accordion</li>
             <li>the <code>script</code> tag contains a configuration object which 1) activates the second tab and 2) caches the content of the tab and triggers the <code>dom:changed</code> event after injecting the remote content (which will make Feaxures JS to look for new elements that have feaxures)</li>
         </ul>
     </div>
@@ -65,7 +65,7 @@ function(element) {
 
 
 <h3>Lightbox</h3>
-<p>The feaxure for the lightbox gallery is loaded when the user clicks first on any of the images</p>
+<p>The feaxure for the lightbox gallery is loaded when the user clicks first on any of the images. The feaxure is registered only if the screen width is larger than 400px.</p>
 <div data-fxr-lightbox="closeEffect=fade&openEffect=fade">
     <a class="fancybox" rel="gallery1" href="http://farm9.staticflickr.com/8199/8220132885_9e693356e9_b.jpg" title="Misty Tree Orchard (Stanley Zimny)">
         <img src="http://farm9.staticflickr.com/8199/8220132885_9e693356e9_m.jpg" alt="" />
