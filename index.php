@@ -25,8 +25,11 @@
       <div class="jumbotron">
         <h1>Got Feaxures?</h1>
         <p class="lead">Progressive enhancement, done right!</p>
-        <a class="btn btn-large btn-warning" href="example/">Check out the example</a>
-        <a class="btn btn-large btn-inverse" href="feaxures.zip">Download .zip</a>
+        <p>
+            <a class="btn btn-large btn-warning" href="example/">Check out the example</a>
+            <a class="btn btn-large btn-inverse" href="feaxures.zip">Download .zip</a>
+            <a href="https://github.com/adrianmiu/feaxures" class="btn btn-success">GitHub</a>
+        </p>
       </div>
 
       <hr>
