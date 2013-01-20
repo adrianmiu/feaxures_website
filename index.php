@@ -27,7 +27,7 @@
         <p class="lead">Progressive enhancement, done right!</p>
         <p>
             <a class="btn btn-large btn-warning" href="example/">Check out the example</a>
-            <a class="btn btn-large btn-inverse" href="feaxures.zip">Download .zip</a>
+            <a class="btn btn-large btn-inverse" href="https://github.com/adrianmiu/feaxures/archive/master.zip">Download .zip</a>
             <a href="https://github.com/adrianmiu/feaxures" class="btn btn-success">GitHub</a>
         </p>
       </div>
