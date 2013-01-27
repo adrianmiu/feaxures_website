@@ -37,6 +37,7 @@
             <li><a href="#fouc">What about <abbr title="Flash Of Unstyled Content">FOUC</abbr>?</a></li>
             <li><a href="#no-jquery">What if I don't use jQuery?</a></li>
             <li><a href="#no-requirejs">What if I don't use RequireJS?</a></li>
+            <li><a href="#performance">What is the performance hit when using Feaxures?</a></li>
             <li><a href="#website">Why doesn't this page uses Feaxures?</a></li>
             <li><a href="#roadmap">What's on the roadmap?</a></li>
           </ol>
@@ -68,6 +69,9 @@
 _load = function(arrayOfFiles, callbackForWhenFilesAreLoaded, callbackForWhenThereAreErrorsWhileLoadingTheFiles) {
     /* your implementation goes here */
 };</pre>
+
+          <h2 id="performance">What is the performance hit when using Feaxures?</h2>
+          <p>Obviously there will be some performance hit when using Feaxures but I think the advantages are bigger than the performance hit. I did a simple speed test (available on the Git repository) and the Feaxures's toll is of <strong>50 miliseconds</strong>.</p>
 
           <h2 id="website">Why doesn't this website use Feaxures?</h2>
           <p>Because I'm lazy. The same reason I've build Feaxures. Isn't it ironic?</p>
