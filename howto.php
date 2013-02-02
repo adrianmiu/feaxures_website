@@ -38,10 +38,10 @@ if ($(window).width() > 400) {
     })
 }</pre>
       <p>You can also use <a href="http://modernizr.com">Modernizr</a>'s tests to check when to load certain feaxures.</p>
-      <p>Obviously, once a feaxure is not registered, it remained unregistered. In the example above, if the user rotates its phone and his screen width changes to 640 the feaxure will remain unregistered.</p>
+      <p>Once a feaxure is not registered, it remained unregistered. In the example above, if the user rotates its phone and his screen width changes to 640 the feaxure will remain unregistered, thus not accesible to the feaxures instance.</p>
 
       <h2>How to detach feaxure for mobiles</h2>
-      <p>Feaxures cannot be detached. Very few progressive enhancement plugins (eg: jQuery plugins) have a <code>destroy()</code> method.</p>
+      <p>Feaxures cannot be detached (at least not yet). Very few progressive enhancement plugins (eg: jQuery plugins) have a <code>destroy()</code> method.</p>
       <p>But sometimes you may want to detach a feaxure based on the context. For example if a 'tabbed navigation' feaxure is attached when the user's phone is on lanscape-mode and you want to dettach it when it's on portrait mode.</p>
       <pre class="prettyprint linenums lang-js">
 feaxures.register('tabs', {
@@ -49,7 +49,7 @@ feaxures.register('tabs', {
     attach: function(el, options) {
         $(el).tabs(options);
         $(window).on('resize', function(){
-            if ($(window).width() < 320) {
+            if ($(window).width() &lt; 320) {
                 $(el).tabs('destroy');
             } else {
                 // in case the feaxure is detached you may want to attach it again
@@ -63,13 +63,25 @@ feaxures.register('tabs', {
 
       <h2>How to augment an HTML fragment loaded using AHAH</h2>
       <p>Probably your application/website is using the jQuery's <code>load()</code> method to inject HTML from other sources. This method is pretty good as it detects the scripts and tries to load them and execute them in order. But if you're using Feaxures for progressive enhancement you'll want to ditch the "old way" of doing it.</p>
+      <p>Since the resources are loaded asyncronously (most of the times) Feaxures returns promises for almost all methods (like <code>load()</code> or <code>attach()</code>). This way you can create your function that returns an already enhanced HTML fragment</p>
 <pre class="prettyprint linenums lang-js">
-$('select').load(pathToFragment, function() {
-    feaxures.discover($(this));
-});
+var loadEnhanceAndInject = function(url, selector) {
+  $('&lt;div style="height: 0;" /&gt;').appendTo('body').load(url, function() {
+    var self = this,
+        fxrPromise = feaxures.discover($(this));
+    fxrPromise.done(function() {
+      $(self).children().fadeIn('slow').appendTo($(selector).empty());
+    });
+  });
 }</pre>
-      <p>This method is not perfect as it injects the HTML fragment into the DOM before it is augmented.</p>
-      <p>I plan to introduce the jQuery's Deferred into the attaching of feaxures to make possible to determine when a set of feaxures was done being attached to a DOM element</p>
+      <p>This is not the only way to do it and you have to test your plugins/libraries for any possible "malfunctioning". I have attempted different methods for asyncronously loading and enhancing HTML fragments before injecting them into the DOM not all of them worked. For example, for the jQuery UI's accordion widget, there were issues with the accordion panels height due to the fact that the augmentation happens in an element detached from the DOM (or hidden).</p>
+
+      <h2>How to load a feaxure that is not bound to a particular element</h2>
+      <p>The easiest way would be to add a tag to your HTML that would trigger that feaxure to be loaded. This way you would know where that feaxure came from just by looking at your source code.</p>
+      <p>Another way is to do this is to attach the feaxure on a non-DOM element like so.</p>
+<pre class="prettyprint linenums lang-js">
+feaxures.attach('whatever', $('&lt;div /&gt;'));</pre>
+      <p><span class="label label-warning">Warning!</span> You have to make sure that the <code>attach</code> property of the feaxure will not depend on the existence of a DOM element.</p>
 
       <h2>How to load a feaxure and execute a callback</h2>
       <p>Sometimes you may want to programmatically load a feaxure and execute a callback when the feaxure's files are loaded.</p>

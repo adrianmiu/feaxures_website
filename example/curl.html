@@ -56,7 +56,8 @@ function(element) {
         "active": "1",
         "load": function(event, ui) {
             $(ui.tab).attr('href', '#' + $(ui.panel).attr('id'));
-            $('body').trigger('dom:changed');
+            // this assumes the feaxures variable is globally accsessible
+            feaxures.discover($(ui.panel)); 
         }
     }
 }

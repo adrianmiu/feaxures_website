@@ -38,7 +38,7 @@ define('gmaps', ['async!//maps.google.com/maps/api/js?v=3&sensor=false'], functi
 
 require(['feaxures'], function(Feaxures) {
     var feaxures = new Feaxures();
-
+    window.feaxures = feaxures;
     /**
      * You can attach events to the feaxures instance similar to jQuery
      * You have: on(), one() and off() or adding/removing callbacks

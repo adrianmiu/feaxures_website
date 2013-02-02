@@ -71,7 +71,7 @@ _load = function(arrayOfFiles, callbackForWhenFilesAreLoaded, callbackForWhenThe
 };</pre>
 
           <h2 id="performance">What is the performance hit when using Feaxures?</h2>
-          <p>Obviously there will be some performance hit when using Feaxures but I think the advantages are bigger than the performance hit. I did a simple speed test (available on the Git repository) and the Feaxures's toll is of <strong>50 miliseconds</strong>.</p>
+          <p>Obviously Feaxures JS will take its toll with regard to performance but I think the advantages are bigger than the performance hit. I did a simple speed test (available on the Git repository) and the Feaxures's toll is of <strong>50 miliseconds</strong>.</p>
 
           <h2 id="website">Why doesn't this website use Feaxures?</h2>
           <p>Because I'm lazy. The same reason I've build Feaxures. Isn't it ironic?</p>
