@@ -58,12 +58,11 @@
           <p>Loading resources after the DOM is ready (eg: load <code>jquery.ui.tabs</code> after the page is displayed to the user) will definetely cause a <a href="http://www.bluerobot.com/web/css/fouc.asp/">flash of unstyled content</a>. This can be aleviated using different techniques, like <a href="http://www.learningjquery.com/2008/10/1-way-to-avoid-the-flash-of-unstyled-content">this one</a>. That's why Feaxures doesn't come with one but you can find an implementation on the <a href="example/">example</a>.</p>
 
           <h2 id="no-jquery">What if I don't use jQuery?</h2>
-          <p>The script is very much dependent on jQuery and I don't plan to create a non-jQuery version any time soon. You can use Zepto for mobiles though.</p>
+          <p>The script is very much dependent on jQuery and I don't plan to create a non-jQuery version any time soon. You can use Zepto for mobiles to some extend but there are some limitations due to Zepto's <code>data()</code> implementation.</p>
 
           <h2 id="no-requirejs">What if I don't use RequireJS?</h2>
           <p><a href="http://www.requirejs.org/">RequireJS</a> is used to handle the process of loading asyncronously the JS/CSS files. It also helps with managing the depencies. For example if the <code>jquery.ui.tabs.js</code> file is dependent on <code>jquery.ui.widget.js</code> file, RequireJS will load that file first, assuming you have configured it properly using the <code>shim</code> option. </p>
-          <p>When I started this project I used <a href="https://github.com/cujojs/curl">curl.js</a>, an amazing resource loaded which doesn't require you to define depencies as you can force the loaded scripts to be executed in a specific order (although they may be loaded in a different order). But because I couldn't make it work with Google Maps I decided to use RequireJS instead. In some respects <strong>curljs</strong> would be a better choice for Feaxures for loading resources (because it loads the files asyncronously and executes them in order) and I think I might create a version of the script that depends on curljs.</p>
-          <p>After some investigation I found out a solution using the <code>async</code> plugin from RequireJS. I've implemented this solution in the <a href="example/curl">example using curl.js</a> page.</p>
+          <p>When I started this project I used <a href="https://github.com/cujojs/curl">curl.js</a>, an amazing resource loader which doesn't require you to define depencies as you can force the loaded scripts to be executed in a specific order (although they may be loaded in a different order). In some respects <strong>curljs</strong> would be a better choice for Feaxures for loading resources so I've created tests a <a href="example/curl">demo page for curljs</a> as well.</p>
           <p>If you're using another resource loader all you need to do to replace the RequireJS dependency is to replace the <code>_load()</code> function with your own. The implementation is as follows:</p>
           <pre class="prettyprint linenums lang-js">
 _load = function(arrayOfFiles, callbackForWhenFilesAreLoaded, callbackForWhenThereAreErrorsWhileLoadingTheFiles) {
@@ -71,7 +70,8 @@ _load = function(arrayOfFiles, callbackForWhenFilesAreLoaded, callbackForWhenThe
 };</pre>
 
           <h2 id="performance">What is the performance hit when using Feaxures?</h2>
-          <p>Obviously Feaxures JS will take its toll with regard to performance but I think the advantages are bigger than the performance hit. I did a simple speed test (available on the Git repository) and the Feaxures's toll is of <strong>50 miliseconds</strong>.</p>
+          <p>Obviously Feaxures JS will take its toll with regard to performance but I think the advantages are bigger than the performance hit. I did a simple speed test (available on the Git repository) and the Feaxures's toll is of <strong>50 miliseconds</strong>. On the other hand, since you don't include files in a normal way the <code>domready</code> will trigger sooner.</p>
+          <p>On slow connections, with Feaxures JS users will see something on the page appearing sooner so the perceived speed is much better than the usual method.</p>
 
           <h2 id="website">Why doesn't this website use Feaxures?</h2>
           <p>Because I'm lazy. The same reason I've build Feaxures. Isn't it ironic?</p>

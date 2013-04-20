@@ -23,11 +23,12 @@
         <link rel="shortcut icon" href="../favicon.ico">
 
         <!-- we put the files here because we have feaxures that autoload -->
+        <script src="js/jquery.js"></script>
         <script src="js/curl.js"></script>
         <script src="js/example-curl.js"></script>
     </head>
     <body>
-        <div style="margin-right: 350px; margin-left: 10px;">
+        <div style="margin-right: 10px; margin-left: 10px;">
 
         <h1>Feaxures Examples with curl.js</h1>
         <p>Check out the <code><a href="js/example-curl.js">example-curl.js</a></code> to understand where is all coming from. Want the version for <a href="./">require.js</a>?</p>
@@ -57,7 +58,7 @@ function(element) {
         "load": function(event, ui) {
             $(ui.tab).attr('href', '#' + $(ui.panel).attr('id'));
             // this assumes the feaxures variable is globally accsessible
-            feaxures.discover($(ui.panel)); 
+            $('body').trigger('dom:changed');
         }
     }
 }

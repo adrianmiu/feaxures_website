@@ -43,7 +43,7 @@
           <p>You also need to load your features' definition file (eg: <code>feaxures-def.js</code>). At this point you don't need to load <code>feaxures.js</code> as you will define it as a depedency withing <code>feaxures-def.js</code> (at step 2)</p>
 
           <h2>2. Configure your loader </h2>
-          <p>Because Feaxures JS depends on RequireJS you must first configure require.js. You can learn more about requireJS configuration options <a href="http://requirejs.org/docs/api.html#config">here</a>. curl.js has different configuration options</p>
+          <p>If you use RequireJS with FeaxuresJS you must first configure it. You can learn more about requireJS configuration options <a href="http://requirejs.org/docs/api.html#config">here</a>. <a href="https://github.com/cujojs/curl">curl.js</a> has different configuration options.</p>
           <pre class="prettyprint linenums lang-js">
 require.config({
     // the main location of your JS files; everything else will be relative to this path
@@ -94,11 +94,21 @@ require(['feaxures'], function(Feaxures) {
       // activate the debug mode, which outputs various messages to the console
       'debug': true,
     });
-    // register a new feature (in this example jQuery UI tabs)
+
+    // minimum configuration options for a feature
+    feaxures.register('accordion', {
+        'files': ['jqueryui/jquery.ui.accordion'],
+        'attach': function(element, options) {
+            $(element).accordion(options);
+        }
+    }),
+
+    // feature will full configuration options explained
     feaxures.register('tabs', {
-        // auto-load the feature. true/false (default)
+        // auto-load the feature. true/false(default)
         // this will load the files as soon as feaxures is initialized 
-        // and will NOT wait for the DOM to be ready
+        // and will NOT wait for the DOM to be ready and/or check 
+        // if there are elements that have this feature
         'autoLoad'    : false,
 
         // the selector that will be used to query the DOM
@@ -130,13 +140,19 @@ require(['feaxures'], function(Feaxures) {
         // callback to be executed if there are errors while loading the files
         'onLoadError' : null,
 
-        // callback to be executed before a feature is applied to a DOM element
-        // if the callback returns false the feature is not applied anymore
-        'onBeforeApply' : null,
+        // callback to be executed after a feature is applied to a DOM element
+        'onAttach'  : null,
         
-        // callback to be executed after a feature is applied to  a DOM element
-        'onAfterApply'  : null,
+        // callback to be executed after a feature is removed from a DOM element
+        'onDetach'  : null,
         
+        // a function to determine whether or not the element should be attached
+        // to the DOM element. it will be used to check if the feature should
+        // be detached from the element as well
+        'attachCondition': function(element) {
+            return $(window).width() > 500;
+        }
+
         // function that contains the code to attach a feature to the element
         // requires 2 parameters:
         // el: the DOM element
@@ -161,11 +177,12 @@ require(['feaxures'], function(Feaxures) {
               <p>The content of the <code>data-fxr-tabs</code> will determine the options that will be applied to that DOM element. Here Feaxures JS offers you lots of flexibility.</p>
               <ol>
                 <li><strong>true</strong> or <strong>leave it empty</strong>. This means the feature will be applied using the default options</li>
-                <li><strong>false</strong>. This means the feature will NOT be applied.</li>
+                <li><strong>false</strong>. This means the feature will NOT be applied. I know it seems unnecessary but I use it to quickly test how the web page works/looks without the feature.</li>
                 <li><strong>a URL query string</strong> like <code>key=value&amp;another_key=another_value</code>.</li>
-                <li><strong>a javascript object string</strong> like <code>{"key": "value", "another_key": "another_value"}</code> (be carefull with the quotes though). To convert the string into a javascript object we use <code>eval()</code>.</li>
-                <li><strong>a ID of a DOM element</strong> like "#tabsConfig" which will point to a <code>script</code> element containing the options.
+                <li><strong>a JSON (not javascript object) string</strong> like <code>{"key": "value", "another_key": "another_value"}</code> (be carefull with the quotes though). To convert the string into a javascript object we use <code>eval()</code>.</li>
+                <li><strong>an ID of a DOM element containing a javascript object</strong> which will point to a <code>script</code> element containing the options.
 <pre class="prettyprint numlines lang-html">
+&lt;div data-fxr-tabs="#tabConfig"&gt;&lt;/div&gt;  
 &lt;script type="text/feaxures" id="tabConfig"&gt;
 {
     "active": "1",
@@ -174,25 +191,26 @@ require(['feaxures'], function(Feaxures) {
     }
 }
 &lt;/script&gt;</pre>
-                  <p>I chose to use the <code>script</code> tag for 2 reasons: it's not visible to the user and your code editor will highlight the syntax.</p>
+                  <p>I chose to use the <code>script</code> tag for 2 reasons: it's not visible to the user and your code editor will highlight the syntax (if you configure it properly).</p>
                   <p><span class="label label-important">Important</span> You must use "text/feaxures", otherwise the browser will interpret the code.</p>
                   <p>The content of script block is eval()'ed into an object.</p>
                 </li>
-                <li><strong>a function</strong> if the data-fxr attribute or the DOM element that it points to start with <code>function</code>.
+                <li><strong>an ID of a DOM element containing a function</strong>  if the data-fxr attribute or the DOM element that it points to starts with <code>function</code>.
 <pre class="prettyprint numlines lang-html">
+&lt;div data-fxr-tabs="#tabConfig"&gt;&lt;/div&gt;  
 &lt;script type="text/feaxures" id="tabConfig"&gt;
 function(element) {
   // do some expensive computation here
   // and then return an object or false
 }
 &lt;/script&gt;</pre>
-                  <p>The function receives the DOM element as the only argument and returns an object or false, if you don't what to apply the feature to that element.</p>
+                  <p>The function receives the DOM element as the only argument and returns an object or false (when you don't what to apply the feature to that element).</p>
                 </li>
               </ol>
 
               <h2>5. Feaxures events</h2>
               <p>You can attach various callbacks on different events implemented on Feaxures (check out the <a href="example/js/example.js">example.js</a> source code).</p>
-              <p>The events available on Feaxures are <code>load</code>, <code>loadError</code>, <code>onBeforeAttach</code>, <code>onAfterAttach</code> and the callbacks you assign to each of them will be executed for each feaxure. If you want to attach an event to a specific feaxure you must use the suffix <code>:feaxureName</code> (eg: <code>loadError:tabs</code>)</p>
+              <p>The events available on Feaxures are <code>load</code>, <code>loadError</code>, <code>onAttach</code>, <code>onDetach</code> and the callbacks you assign to each of them will be executed for each feaxure. If you want to attach an event to a specific feaxure you must use the suffix <code>:feaxureName</code> (eg: <code>loadError:tabs</code>)</p>
               <p>Some use cases for events are:</p>
               <ul>
                   <li>Notify the developers when a feaxure is not loaded.</li>

@@ -87,22 +87,23 @@ require(['feaxures'], function(Feaxures) {
         $('#logger').append('<p class="alert alert-error">Feaxure "'+event.feature+'" was NOT loaded</p>');
     });
 
-    // other events
-    feaxures.on('beforeAttach', function(event) {
-        $('#logger').append('<p class="alert alert-success">Feaxure "'+event.feature+'" to be attached on #'+$(event.target).attr('id')+'</p>');
+    feaxures.on('attach:accordion', function(event) {
+        $('#logger').append('<p class="alert alert-success">"Accordion" was attached on #'+$(event.element).attr('id')+'</p>');
     });
-    feaxures.on('afterAttach:accordion', function(event) {
-        $('#logger').append('<p class="alert alert-success">"Accordion" was attached on #'+$(event.target).attr('id')+'</p>');
+
+    feaxures.on('detach:accordion', function(event) {
+        $('#logger').append('<p class="alert alert-error">"Accordion" was detached from #'+$(event.element).attr('id')+'</p>');
     });
+
 
     /**
      * this function is to prevent FOUC (flash of unstyled content)
      * we are using Modernizr to add the 'js' class to the HTML tag
      * so, if the element matches the '.js .fouc' selector it's hidden by default
      */
-    feaxures.on('afterAttach', function(event) {
-        if ($(event.target).hasClass('fouc')) {
-            $(event.target).css({display: 'none'}).removeClass('fouc').fadeIn(1000);
+    feaxures.on('attach', function(event) {
+        if ($(event.element).hasClass('fouc')) {
+            $(event.element).css({display: 'none'}).removeClass('fouc').fadeIn(1000);
         }
     });
 
@@ -139,8 +140,14 @@ require(['feaxures'], function(Feaxures) {
         },
 
         files: ['js!jqueryui/jquery.ui.core.js!order', 'js!jqueryui/jquery.ui.widget.js!order', 'js!jqueryui/jquery.ui.accordion.js!order', 'css!jqueryui/css/jquery-ui-1.9.2.custom.min.css'],
+        attachCondition: function(element) {
+            return $(window).width() > 600;
+        },
         attach: function(el, options) {
             $(el).accordion(options);
+        },
+        detach: function(el) {
+            $(el).accordion('destroy');
         }
     });
 
