@@ -30,7 +30,7 @@
       <hr>
 
       <h2>How to disable a feaxure for mobiles</h2>
-      <p>For example you would not want to activate a 'tabbed navigation' feature for mobiles phones.The best way is not to register the feaxure for screens bellow a certain width.</p>
+      <p>For example you would not want to activate a 'tabbed navigation' feature for mobiles phones. The best way is not to register the feaxure for screens below a certain width.</p>
       <pre class="prettyprint linenums lang-js">
 if ($(window).width() > 400) {
     feaxures.register('tabs', {
@@ -38,11 +38,11 @@ if ($(window).width() > 400) {
     })
 }</pre>
       <p>You can also use <a href="http://modernizr.com">Modernizr</a>'s tests to check when to load certain feaxures.</p>
-      <p>Once a feaxure is not registered, it remained unregistered. In the example above, if the user rotates its phone and his screen width changes to 640 the feaxure will remain unregistered, thus not accesible to the feaxures instance.</p>
+      <p>Once a feaxure is not registered, it remained unregistered. In the example above, if the user rotates its phone and his screen width changes to 640 the feaxure will remain unregistered, thus not accessible to the feaxures instance.</p>
 
       <h2>How to detach feaxure for mobiles</h2>
       <p>Feaxures cannot be detached (at least not yet). Very few progressive enhancement plugins (eg: jQuery plugins) have a <code>destroy()</code> method.</p>
-      <p>But sometimes you may want to detach a feaxure based on the context. For example if a 'tabbed navigation' feaxure is attached when the user's phone is on lanscape-mode and you want to dettach it when it's on portrait mode.</p>
+      <p>But sometimes you may want to detach a feaxure based on the context. For example if a 'tabbed navigation' feaxure is attached when the user's phone is on landscape-mode and you want to detach it when it's on portrait mode.</p>
       <pre class="prettyprint linenums lang-js">
 feaxures.register('tabs', {
     // rest of the feaxure's configuration goes here
@@ -63,7 +63,7 @@ feaxures.register('tabs', {
 
       <h2>How to augment an HTML fragment loaded using AHAH</h2>
       <p>Probably your application/website is using the jQuery's <code>load()</code> method to inject HTML from other sources. This method is pretty good as it detects the scripts and tries to load them and execute them in order. But if you're using Feaxures for progressive enhancement you'll want to ditch the "old way" of doing it.</p>
-      <p>Since the resources are loaded asyncronously (most of the times) Feaxures returns promises for almost all methods (like <code>load()</code> or <code>attach()</code>). This way you can create your function that returns an already enhanced HTML fragment</p>
+      <p>Since the resources are loaded asynchronously (most of the times) Feaxures returns promises for almost all methods (like <code>load()</code> or <code>attach()</code>). This way you can create your function that returns an already enhanced HTML fragment</p>
 <pre class="prettyprint linenums lang-js">
 var loadEnhanceAndInject = function(url, selector) {
   $('&lt;div style="height: 0;" /&gt;').appendTo('body').load(url, function() {
@@ -74,7 +74,7 @@ var loadEnhanceAndInject = function(url, selector) {
     });
   });
 }</pre>
-      <p>This is not the only way to do it and you have to test your plugins/libraries for any possible "malfunctioning". I have attempted different methods for asyncronously loading and enhancing HTML fragments before injecting them into the DOM not all of them worked. For example, for the jQuery UI's accordion widget, there were issues with the accordion panels height due to the fact that the augmentation happens in an element detached from the DOM (or hidden).</p>
+      <p>This is not the only way to do it and you have to test your plugins/libraries for any possible "malfunctioning". I have attempted different methods for asynchronously loading and enhancing HTML fragments before injecting them into the DOM not all of them worked. For example, for the jQuery UI's accordion widget, there were issues with the accordion panels height due to the fact that the augmentation happens in an element detached from the DOM (or hidden).</p>
 
       <h2>How to load a feaxure that is not bound to a particular element</h2>
       <p>The easiest way would be to add a tag to your HTML that would trigger that feaxure to be loaded. This way you would know where that feaxure came from just by looking at your source code.</p>

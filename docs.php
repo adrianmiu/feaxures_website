@@ -40,7 +40,7 @@
             <li><a href="http://www.jquery.com">jQuery</a>. Although you can change it with your own (<a href="faq.php#no-jquery">see FAQ</a>)</li>
           </ul>
           <p><span class="label label-important">Important</span> Feaxures is defined as an AMD module so you only need to load <code>require.js</code> before using it. You may load jQuery as well just for optimization reasons.</p>
-          <p>You also need to load your features' definition file (eg: <code>feaxures-def.js</code>). At this point you don't need to load <code>feaxures.js</code> as you will define it as a depedency withing <code>feaxures-def.js</code> (at step 2)</p>
+          <p>You also need to load your features' definition file (eg: <code>feaxures-def.js</code>). At this point you don't need to load <code>feaxures.js</code> as you will define it as a dependency within <code>feaxures-def.js</code> (at step 2)</p>
 
           <h2>2. Configure your loader </h2>
           <p>If you use RequireJS with FeaxuresJS you must first configure it. You can learn more about requireJS configuration options <a href="http://requirejs.org/docs/api.html#config">here</a>. <a href="https://github.com/cujojs/curl">curl.js</a> has different configuration options.</p>
@@ -66,7 +66,7 @@ require.config({
         // load everything that starts with 'jqueryui' from the folder '../jqueryui' relative to the baseUrl
         'jqueryui': '../jqueryui'
     },
-    // this is how you must define your depencies with requireJS
+    // this is how you must define your dependencies with requireJS
     // the lines bellow will instruct requireJS that before trying to load jquery.ui.tabs.js to load a list of files first
     'shim': {
         'jqueryui/jquery.ui.tabs': {
@@ -86,7 +86,7 @@ require.config({
               <pre class="prettyprint linenums lang-js">
 // since Feaxures is defined as AMD module and requireJS is also an module loader,
 // we load it as an AMD module. If you don't want to do that you may skip
-// embeding the script below in a require() call because Feaxures is available
+// embedding the script below in a require() call because Feaxures is available
 // in the global name space as well.
 require(['feaxures'], function(Feaxures) {
     // create an instance of the feaxures using a specific configuration
