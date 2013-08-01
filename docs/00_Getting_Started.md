@@ -24,4 +24,5 @@ The pages below contain examples of code for using Feaxures
 * [Options for enhancing elements](Examples/Element_options) - options for customizing the enhancements
 * [Active feaxures](Examples/Active_feaxures) - feaxures that are enable/disabled automatically
 * [Lazy loaded feaxures](Examples/Lazy_loaded_feaxures) - feaxures that are activated upon user action (click, hover)
+* [Other options available](Examples/Other_feaxures_options) - description of the other less important, but useful, configuration options
 * [Custom Feaxures implementation](Examples/Custom_Feaxures_implementation) - how to use Feaxures without curljs or jQuery
