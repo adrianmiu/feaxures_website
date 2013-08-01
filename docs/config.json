@@ -1,0 +1,18 @@
+{
+	"title": "Feaxures",
+	"tagline": "Progressive Enhancement Done Right!",
+	"image": "img/app.png",
+	"theme": "blue",
+	"float": false,
+	"date_modified": false,
+	"examples": "/examples",
+	"repo": "adrianmiu/feaxures",
+	"twitter": ["adrianmiu"],
+	"google_analytics": "UA-535999-14",
+	"links": {
+		"Download": "https://github.com/adrianmiu/feaxures/archive/master.zip",
+		"GitHub Repo": "https://github.com/adrianmiu/feaxures",
+		"Help/Support/Bugs": "https://github.com/adrianmiu/feaxures/issues",
+		"Donate": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9CDENUW86KA3J"
+	}
+}
