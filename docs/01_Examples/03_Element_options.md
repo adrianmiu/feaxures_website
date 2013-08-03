@@ -19,7 +19,7 @@ myFeaxures.register('tabs', {
 What is really awesome about the <code>defaults</code> option is that it can be a <strong>function</strong>. Your defaults may be retrieved from a cookie, a global user preferences object or whatever you can think of (it must be a synchronous operation though).
 
 ## Feaxures parameters per element
-At this point you may as yourself: "How can I pass parameters to initialize an enhancement on an element?". There are a few ways that give you full flexibility.
+At this point you may as yourself: "How can I pass parameters to initialize an enhancement for each element?". There are a few ways that give you full flexibility.
 
 ### FALSE
 
@@ -35,7 +35,7 @@ If you're confortable writting query strings you can do that
 <div data-fxr-tabs="active=1&show=slideDown">
 ```
 
-### A JSON object
+### A javascript object
 
 <div class="alert">Be careful with the quotes, though!</div>
 ```html
@@ -79,5 +79,5 @@ function(element) {
 ```
 Yes, the function receives the <code>element</code> parameter so you can perform some operations.
 
-<div class="alert">Your container have to have a type like <code>text/feaxures</code> that is not interpreted by the browser.</div>
+<div class="alert">Your container has to have a type that is not interpreted by the browser (like <code>text/feaxures</code>, but this is not mandatory).</div>
 <div class="alert">If your options container is a function it has to run syncronously. Don't do fancy ajax stuff in there!</div>

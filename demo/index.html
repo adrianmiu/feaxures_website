@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Feaxures Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A demonstration of Feaxure's capabilities.">
+    <meta name="author" content="Adrian Miu">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <script type="text/javascript" src="assets/jquery/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="assets/curl/curl.js"></script>
+    <script type="text/javascript">
+        curl.config({
+            baseUrl: './',
+            apiName: 'require'
+        });
+    </script>
+    <script type="text/javascript" src="assets/feaxures/feaxures.js"></script>
+    <script type="text/javascript" src="js/my_feaxures.js"></script>
+
+    <style type="text/css">
+        .lightbox img { height: 150px;}
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".bs-docs-sidebar" data-twttr-rendered="true">
+
+<!-- Subhead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+    <div class="container">
+        <h1>Feaxures JS Demo</h1>
+        <p >This demo features: <a href="http://www.jqueryui.com">jQuery UI</a> widgets, Addy Osmany's <a href="http://addyosmani.github.io/jquery-ui-bootstrap/">jQuery UI Bootstrap theme</a></p>
+    </div>
+</header>
+
+
+<div class="container">
+<!-- Docs nav ================================================== -->
+
+<div class="row">
+    <div class="span6">
+        <!-- accordion feaxure using QUERY STRING type of parameters -->
+        <div data-fxr-accordion="active=1&collapsible=true">
+            <h3>First</h3>
+            <div>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</div>
+            <h3>Second</h3>
+            <div>Phasellus mattis tincidunt nibh.</div>
+            <h3>Third</h3>
+            <div>Nam dui erat, auctor a, dignissim quis.</div>
+        </div>
+    </div>
+
+    <div class="span6">
+        <!-- tabs feaxure without any special options -->
+        <div data-fxr-tabs="">
+            <ul>
+                <li><a href="#tabs-a">First</a></li>
+                <li><a href="#tabs-b">Second</a></li>
+                <li><a href="#tabs-c">Third</a></li>
+            </ul>
+            <div id="tabs-a">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div id="tabs-b">
+                <p>Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum bibendum.</p>
+            </div>
+            <div id="tabs-c">
+                <p>Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+    <h4 class="span12">Buttons and button set</h4>
+    <div class="span4">
+        <p data-fxr-buttonset="">
+            <input type="radio" id="radio1" name="radio"><label for="radio1">Choice 1</label>
+            <input type="radio" id="radio2" name="radio" checked="checked"><label for="radio2">Choice 2</label>
+            <input type="radio" id="radio3" name="radio"><label for="radio3">Choice 3</label>
+        </p>
+    </div>
+    <div class="span4">
+        <p data-fxr-buttonset="">
+            <input type="checkbox" id="check1"><label for="check1">B</label>
+            <input type="checkbox" id="check2"><label for="check2">I</label>
+            <input type="checkbox" id="check3"><label for="check3">U</label>
+        </p>
+    </div>
+    <div class="span4">
+        <a data-fxr-button='{"disabled":true, "icons":{"primary": "ui-icon-gear"}}'>Disabled button</a>
+    </div>
+</div>
+
+<div class="row">
+    <h4 class="span12">Dialog</h4>
+    <div class="span12">
+        <p class="dialog-button">
+            <a href="#" id="dialog_link" class="ui-state-default ui-corner-all" data-fxr-button="" data-fxr-opendialog="container=dialog_simple">
+                <span class="ui-icon ui-icon-newwin"></span>Open Dialog
+            </a>
+            &nbsp;
+            <a href="#" id="modal_link" class="ui-state-default ui-corner-all" data-fxr-button="" data-fxr-opendialog="container=dialog_message">
+                <span class="ui-icon ui-icon-newwin"></span>
+                Open Modal Dialog
+            </a>
+        </p>
+    </div>
+    <!-- ui-dialog -->
+    <div data-fxr-dialog="autoOpen=false" id="dialog_simple" title="Dialog Simple Title">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <!--static dialog-->
+    <div data-fxr-dialog="autoOpen=false&modal=true" id="dialog_message" title="Modal Dialog">
+        <p>
+            <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+            Your files have downloaded successfully into the <a href="#">My Downloads</a> folder.
+        </p>
+        <p>
+            Currently using <b>36% of your storage space</b>.
+        </p>
+    </div>
+</div>
+<!-- Datepicker -->
+<div class="row">
+    <section class="span6">
+        <h4>Datepicker (loads on <code>focus</code>)</h4>
+        <input type="text" data-fxr-datepicker='{"dateFormat": "yy-mm-dd"}'>
+    </section>
+    <!-- Autocomplete -->
+    <section class="span6">
+        <h4>Autocomplete (loads on <code>focus</code>)</h4>
+        <input type="text" data-fxr-autocomplete="#tagsOptions">
+        <script type="text/feaxures" id="tagsOptions">
+        {
+            "source": ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"]
+        }
+        </script>
+    </section>
+    <!--end Autocomplete-->
+</div>
+<!--end datepicker-->
+<!-- Slider -->
+<div class="row">
+    <div class="span6">
+        <h4>Sliders</h4>
+        <div data-fxr-slider='{"range": true, "values": [10, 50]}'></div>
+        <br />
+        <div data-fxr-slider="value=50"></div>
+        <br />
+        <div data-fxr-slider="step=10&value=60"></div>
+    </div>
+    <!-- Menu -->
+    <div class="span6">
+        <h4>Menu</h4>
+        <div class="clearfix">
+            <ul data-fxr-menu="">
+                <li><a href="#">Aberdeen</a></li>
+                <li><a href="#">Ada</a></li>
+                <li><a href="#">Adamsville</a></li>
+                <li><a href="#">Addyston</a></li>
+                <li>
+                    <a href="#">Delphi</a>
+                    <ul>
+                        <li><a href="#">Ada</a></li>
+                        <li><a href="#">Saarland</a></li>
+                        <li><a href="#">Salzburg</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Saarland</a></li>
+                <li>
+                    <a href="#">Salzburg</a>
+                    <ul>
+                        <li>
+                            <a href="#">Delphi</a>
+                            <ul>
+                                <li><a href="#">Ada</a></li>
+                                <li><a href="#">Saarland</a></li>
+                                <li><a href="#">Salzburg</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="?Delphi">Delphi</a>
+                            <ul>
+                                <li><a href="#">Ada</a></li>
+                                <li><a href="#">Saarland</a></li>
+                                <li><a href="#">Salzburg</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Perch</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--end slider-->
+
+<h4>Lightbox (loads on <code>click</code>)</h4>
+<div class="lightbox">
+    <a data-fxr-lightbox="" rel="gallery1" href="http://farm6.staticflickr.com/5471/9036958611_fa1bb7f827_b.jpg" title="Westfield Waterfalls - Middletown CT Lower (Graham_CS)">
+        <img src="http://farm6.staticflickr.com/5471/9036958611_fa1bb7f827_m.jpg" alt="" />
+    </a>
+    <a data-fxr-lightbox="" rel="gallery1" href="http://farm4.staticflickr.com/3824/9041440555_2175b32078_b.jpg" title="Calm Before The Storm (One Shoe Photography Ltd.)">
+        <img src="http://farm4.staticflickr.com/3824/9041440555_2175b32078_m.jpg" alt="" />
+    </a>
+    <a data-fxr-lightbox="" rel="gallery1" href="http://farm3.staticflickr.com/2870/8985207189_01ea27882d_b.jpg" title="Lambs Valley (JMImagesonline.com)">
+        <img src="http://farm3.staticflickr.com/2870/8985207189_01ea27882d_m.jpg" alt="" />
+    </a>
+    <a data-fxr-lightbox="" rel="gallery1" href="http://farm4.staticflickr.com/3677/8962691008_7f489395c9_b.jpg" title="Grasmere Lake (Phil 'the link' Whittaker (gizto29))">
+        <img src="http://farm4.staticflickr.com/3677/8962691008_7f489395c9_m.jpg" alt="" />
+    </a>
+</div>
+
+<h4>Google maps</h4>
+<p>The feaxure below uses the <code>google</code> plugin of curl.js (included in <code>my_feaxures.js</code>) to load the Google Maps files</p>
+<div class="alert">Due to the nature of Google API, implementing such a feaxure is a little more complex. Check <a href="js/my_feaxures.js">the source</a>.</div>
+<div data-fxr-maps="{width: 500, height: 500, lat: 45, lng: 23}"></div>
+
+</body>
+</html>

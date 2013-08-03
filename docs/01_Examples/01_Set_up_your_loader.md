@@ -1,6 +1,6 @@
 ## Curl.js
 
-I like using [curl.js](https://github.com/cujojs/curl‎) because it's very small. I think 15kb gzipped will all the plugins (css loader, non-AMD js loader, async loader for google maps).
+I like using [curl.js](https://github.com/cujojs/curl‎) because it's very small. Only 7kb minified and gzipped and having all the plugins (css loader, non-AMD js loader, async loader for google maps).
 
 Although there are many options for configuring curl.js here's the minimum you must do
 ```js
@@ -19,7 +19,7 @@ require.config({
 });
 ```
 
-<div class="alert">Each loader has it's own particular look for files, so learn its details.</div>
+<div class="alert">Each loader has it's own particular way to resolve the path to files, so learn its details.</div>
 
 ### Getting it into your head
 
@@ -34,7 +34,7 @@ curl({
 });
 </script>
 <script src="/vendor/feaxures/feaxures.js"></script>
-<script src="/js/my_feaxures_definitions.js"></script>
+<script src="/js/my_feaxures.js"></script>
 ```
 
 Niiiice!.... Now, go and [configure your first feaxure](Basic_feaxure)

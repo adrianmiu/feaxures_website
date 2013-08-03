@@ -3,7 +3,13 @@ php_flag display_errors on
 php_flag html_errors on
 
 RewriteEngine On
-#RewriteBase /
+#RewriteBase /_projects/fxr/feaxures_website/
+
+RewriteRule ^contact\.php$ index.php [R=301,L]
+RewriteRule ^faq\.php$ Frequently_Asked_Questions [R=301,L]
+RewriteRule ^docs\.php$ Getting_Started [R=301,L]
+RewriteRule ^howto\.php$ Examples [R=301,L]
+RewriteRule ^example/$ demo/ [R=301,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

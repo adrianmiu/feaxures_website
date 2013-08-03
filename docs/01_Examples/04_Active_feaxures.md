@@ -1,6 +1,6 @@
 You want responsiveness with that? Gotcha!
 
-Imagine that the user started browsing your website having the phone in landscape mode and changed its mind. Your manager is the user and he wants to disable the tabs when that happen. So you have need to be able to say to Feaxures the following command:
+Imagine that the user started browsing your website having the phone in landscape mode and changed its mind. Your manager is the user and he wants to disable the tabs when that happen. So you need to be able to say to Feaxures the following command:
 
 <blockquote>apply the tabs feaxure ONLY when the screen width is above 400 pixels, disable it otherwise</blockquote>.
 

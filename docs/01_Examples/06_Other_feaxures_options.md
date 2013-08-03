@@ -1,8 +1,27 @@
 WTF, can Feaxures do more than this? Of course! Here are the other options that you can use for your feaxures:
 
+### files
+
+In the progressive enhancement game, the <code>files</code> option can be the card up your sleeve. Here you can load files specific to the client:
+```js
+myFeaxures.register('tabs', {
+	'autoLoad: true,
+	'files' : function() {
+		var files = ['/vendor/tabs/tabs.css!css', '/vendor/tabs/tabs.js!js'];
+		if (browser === 'IE6') {
+			files.push['/vendor/tabs/tabs.ie6.css!css'];
+		}
+		return files;
+	},
+	'attach': function(element, options) {
+		$(element).tabs(options);
+	}
+});
+```
+
 ### autoLoad
 
-Assuming you know an enhancement is very used you dan auto-load it (so you don't have to write <code>script</code>s in the <code>head</code>)
+Assuming you know an enhancement is used very often you can auto-load it (so you don't have to write <code>script</code>s in the <code>head</code>)
 ```js
 myFeaxures.register('tabs', {
 	'autoLoad: true,
@@ -25,7 +44,7 @@ myFeaxures.register('tabs', {
 	}
 });
 ```
-<div class="alert">The <code>data-fxr-tabs</code> attribute must be there as well.</div>
+<div class="alert">The <code>data-fxr-tabs</code> attribute must be there as it is used to retrieve the initialization options.</div>
 
 ## Event callbacks
 
@@ -96,7 +115,7 @@ The <code>data</code> sent to this event contains the <strong>element</strong> a
 myFeaxures.register('tabs', {
 	'onDetach': function(data) {
 		// tell Google Analytics that users have done something
-		// that resulting in the feaxure being removed
+		// that results in the feaxure being removed
 	},
 	'files' : ['/vendor/tabs/tabs.css!css', '/vendor/tabs/tabs.js!js'],
 	'attach': function(element, options) {

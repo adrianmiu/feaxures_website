@@ -5,7 +5,7 @@
 	"theme": "blue",
 	"float": false,
 	"date_modified": false,
-	"examples": "/examples",
+	"demo": "demo/",
 	"repo": "adrianmiu/feaxures",
 	"twitter": ["adrianmiu"],
 	"google_analytics": "UA-535999-14",

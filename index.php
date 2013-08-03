@@ -168,9 +168,9 @@ if ($homepage && $homepage_url !== '/') {
 			<div class="container">
 				<div class="row">
 					<div class="text-center span12">
-						<?php if ($options['examples']) { ?>
-							<a href="<?php echo $options['examples']; ?>" class="btn btn-primary btn-hero">
-								Examples
+						<?php if ($options['demo']) { ?>
+							<a href="<?php echo $options['demo']; ?>" class="btn btn-primary btn-hero">
+								Demo
 							</a>
 						<?php } ?>
 						<a href="<?php echo $docs_url;?>" class="btn btn-primary btn-hero">
