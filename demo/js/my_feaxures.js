@@ -211,8 +211,8 @@ define('curl/plugin/google', function(){
         },
         files: ['google!//maps.google.com/maps/api/js?v=3&sensor=true'],
         attach: function(el, options) {
-        	// we need to make sure the google files are already loaded
-        	// and this is the only way because the google plugin doesn't hander the !order
+            // we need to make sure the google files are already loaded
+            // and this is the only way because the google plugin doesn't hander the !order
             curl(['js!assets/gmap3/gmap3.js'], function() {
                 $(el).width(options.width);
                 $(el).height(options.height);
