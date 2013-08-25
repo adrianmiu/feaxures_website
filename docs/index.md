@@ -11,7 +11,7 @@
 * <strong>Google friendly</strong> -  By loading your JS/CSS async and in paralel your website will appear faster to Google.
 * <strong>No-jQuery friendly</strong> -  I've heard some apocaliptic prophecies, so Feaxures is ready for the catastrophic event of jQuery's death
 * <strong>IE friendly</strong> -  Not really a selling point for devs, but for managers. And only if they care for users. :)
-* <strong>Simple API</strong> -  If you know how to write HTML and JSON you're good to go. Take a look at the <a href="/examples">examples</a>
+* <strong>Simple API</strong> -  If you know how to write HTML and JSON you're good to go. Take a look at the <a href="demo/">demo</a>' source code.
 * <strong>Tested</strong> -  Code coverage reports coming soon.
 
 

@@ -12,9 +12,28 @@ And that only half of the problem. The advancement of "responsive design" brings
 
 While deciding if that enhancement should be applied to an element is easy on the client-side, deciding to include the necessary JS/CSS files on the server-side is almost impossible. So, even if you manage to do progressive enhancement, the right way, on the client side you are still left with a bunch of files loaded for no reason.
 
+In short, with Feaxures JS, you'll be able to replace the server-side code that looks like this
+
+```
+<?php
+head_enqueue_script('js/cool_plugin.js');
+head_enqueue_style('css/cool_plugin.css');
+?>
+<div class="my-cool-plugin">
+</div>
+<script>
+	$('.my-cool-plugin').coolPlugin();
+</script>
+```
+
+with this
+```html
+<div data-fxr-coolPlugin=""></div>
+```
+
 ## Demos
 
-Check out the full featured [demo page](/demos). And if you want to fell in love, look at the source code.
+Check out the full featured [demo page](demos/). And if you want to fell in love, look at the source code.
 
 ## Examples
 

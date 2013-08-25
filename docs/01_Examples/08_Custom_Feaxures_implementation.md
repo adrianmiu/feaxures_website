@@ -30,19 +30,6 @@ A functional mixin that alows for <code>on</code>, <code>off</code>, <code>trigg
 FeaxuresDependencies.selector = Sizzle || Ender || Zepto;
 ```
 
-### Dom manipulation
-```js
-FeaxuresDependencies.getAttr = function(domElement, attributeName) {
-	// write your own implementation
-};
-FeaxuresDependencies.getData = function(domElement, key) {
-	// write your own implementation
-};
-FeaxuresDependencies.setData = function(domElement, key, value) {
-	// write your own implementation
-};
-```
-
 ### Event binding
 ```js
 FeaxuresDependencies.bindEvent = function(domElement, eventName, callback) {
